@@ -1,0 +1,41 @@
+syntax = "proto3";
+package pt.ulisboa.tecnico.tuplespaces.centralized.contract;
+
+message Server {
+  string serverTarget = 1;
+  string qualifier = 2;
+}
+
+message RegisterRequest {
+  string serviceName = 1;
+  string qualifier = 2;
+  string serverAddress = 3;
+}
+
+message RegisterResponse {
+}
+
+message LookupRequest {
+  string serviceName = 1;
+  string qualifier = 2;
+}
+
+message LookupResponse {
+  repeated Server server = 1;
+}
+
+message DeleteRequest {
+  string serviceName = 1;
+  string target = 2;
+}
+
+message DeleteResponse {
+}
+
+service NamingServerService {
+  rpc register(RegisterRequest) returns (RegisterResponse);
+  rpc lookup(LookupRequest) returns (LookupResponse);
+  rpc delete(DeleteRequest) returns (DeleteResponse);
+}
+
+
